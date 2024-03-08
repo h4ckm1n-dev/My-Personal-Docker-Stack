@@ -1,6 +1,15 @@
-version: '3.7'
+version: '3.8'
 
 services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    network_mode: "host"
+    ports:
+      - "3333:8080"
+    volumes:
+      - open-webui:/app/backend/data
+    restart: always
+
   prometheus:
     image: prom/prometheus:v2.34.0
     volumes:
@@ -106,6 +115,7 @@ services:
       - monitoring_network
 
 volumes:
+  open-webui:
   prometheus_data:
   grafana_data:
   loki_data:
