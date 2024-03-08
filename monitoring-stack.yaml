@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  ollama-webui:
-    image: ghcr.io/ollama-webui/ollama-webui:main
+  open-webui:
+    image: ghcr.io/ollama-webui/open-webui:main
     network_mode: "host"
     volumes:
       - ollama-webui:/app/backend/data
@@ -115,7 +115,7 @@ services:
       - monitoring_network
 
 volumes:
-  ollama-webui:
+  open-webui:
   prometheus_data:
   grafana_data:
   loki_data:
