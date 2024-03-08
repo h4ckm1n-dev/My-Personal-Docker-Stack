@@ -70,7 +70,8 @@ services:
     image: grafana/loki:2.4.1
     ports:
       - "3100:3100"
-    command: -config.file=/etc/loki/local-config.yaml
+    command:
+      - -config.file=/etc/loki/local-config.yaml
     volumes:
       - loki_data:/loki
     restart: unless-stopped
@@ -82,7 +83,8 @@ services:
     volumes:
       - "/var/log:/var/log"
       - "/etc/promtail:/etc/promtail"
-    command: -config.file=/etc/promtail/config.yml
+    command:
+      - -config.file=/etc/promtail/config.yml
     restart: unless-stopped
     networks:
       - monitoring_network
@@ -92,7 +94,8 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     command:
-      - --interval 30
+      - --interval
+      - "30"
     restart: unless-stopped
     networks:
       - monitoring_network
