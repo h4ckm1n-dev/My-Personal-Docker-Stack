@@ -5,7 +5,7 @@ services:
     image: ghcr.io/ollama-webui/open-webui:main
     network_mode: "host"
     volumes:
-      - ollama-webui:/app/backend/data
+      - open-webui:/app/backend/data
     environment:
       - OLLAMA_API_BASE_URL=http://127.0.0.1:11434/api
     restart: always
