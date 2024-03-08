@@ -115,7 +115,7 @@ services:
       - monitoring_network
 
 volumes:
-  open-webui:
+  ollama-webui:
   prometheus_data:
   grafana_data:
   loki_data:
