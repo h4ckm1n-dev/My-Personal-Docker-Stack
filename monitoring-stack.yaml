@@ -2,20 +2,21 @@ version: '3.7'
 
 services:
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:v2.34.0
     volumes:
       - /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
-      - '--web.enable-lifecycle'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
     ports:
       - "9090:9090"
     restart: unless-stopped
-
+  
   alertmanager:
-    image: prom/alertmanager:latest
+    image: prom/alertmanager:v0.23.0
     volumes:
       - /etc/alertmanager:/etc/alertmanager
     command:
@@ -24,39 +25,40 @@ services:
       - "9093:9093"
     restart: unless-stopped
 
+
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:8.4.5
     depends_on:
       - prometheus
     volumes:
       - grafana_data:/var/lib/grafana
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=secure_password # Change this!
     ports:
       - "3000:3000"
     restart: unless-stopped
 
   nodeexporter:
-    image: prom/node-exporter:latest
+    image: prom/node-exporter:v1.3.1
     volumes:
       - "/:/host:ro,rslave"
     command:
       - '--path.rootfs=/host'
+    ports:
+      - "9100:9100"
     restart: unless-stopped
 
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:latest
+    image: gcr.io/cadvisor/cadvisor:v0.43.0
     volumes:
       - "/:/rootfs:ro"
       - "/var/run:/var/run:rw"
       - "/sys:/sys:ro"
       - "/var/lib/docker/:/var/lib/docker:ro"
     ports:
-      - "8080:8080"
+      - "8880:8080"
     restart: unless-stopped
 
   loki:
-    image: grafana/loki:latest
+    image: grafana/loki:2.4.1
     ports:
       - "3100:3100"
     command: -config.file=/etc/loki/local-config.yaml
@@ -65,7 +67,7 @@ services:
     restart: unless-stopped
 
   promtail:
-    image: grafana/promtail:latest
+    image: grafana/promtail:2.4.1
     volumes:
       - "/var/log:/var/log"
       - "/etc/promtail:/etc/promtail"
