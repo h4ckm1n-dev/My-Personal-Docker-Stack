@@ -43,7 +43,7 @@ services:
       - "/sys:/sys:ro"
       - "/var/lib/docker/:/var/lib/docker:ro"
     ports:
-      - "8088:8080"
+      - "8880:8080"
     restart: unless-stopped
 
   watchtower:
