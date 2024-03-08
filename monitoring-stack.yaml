@@ -46,6 +46,23 @@ services:
       - "8880:8080"
     restart: unless-stopped
 
+  loki:
+    image: grafana/loki:2.4.1
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - loki_data:/loki
+    restart: unless-stopped
+
+  promtail:
+    image: grafana/promtail:2.4.1
+    volumes:
+      - "/var/log:/var/log"
+      - "/etc/promtail:/etc/promtail"
+    command: -config.file=/etc/promtail/config.yml
+    restart: unless-stopped
+
   watchtower:
     image: containrrr/watchtower
     volumes:
@@ -57,3 +74,4 @@ services:
 volumes:
   prometheus_data:
   grafana_data:
+  loki_data:
