@@ -1,10 +1,9 @@
-Instructions:
+# Instructions:
 
 Create a directory for your project and navigate into it.
 Save this YAML configuration as docker-compose.yml in your project directory.
 Create a Prometheus configuration file. Inside the prometheus directory (you'll need to create this directory where your docker-compose.yml file is located), create a file named prometheus.yml with the following configuration to scrape metrics from Prometheus itself, Node Exporter, and cAdvisor:
-yaml
-Copy code
+```
 global:
   scrape_interval: 15s
 
@@ -20,13 +19,16 @@ scrape_configs:
   - job_name: 'cadvisor'
     static_configs:
       - targets: ['cadvisor:8080']
+```
 Run Docker Compose to start your services:
-bash
-Copy code
+```
 docker-compose up -d
-Access the UIs:
+```
+# Access the UIs:
+```
 
-Grafana: http://localhost:3000 (default login is admin and password is secret as set in the Docker Compose file, but you should change it).
+```
+Grafana: http://localhost:3000
 Prometheus: http://localhost:9090
 cAdvisor: http://localhost:8080
 Set up Grafana:
