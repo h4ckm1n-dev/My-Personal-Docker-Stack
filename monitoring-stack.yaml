@@ -54,7 +54,6 @@ services:
       - monitoring_network
 
   cadvisor:
-    container_name: cadvisor
     image: gcr.io/cadvisor/cadvisor:latest
     volumes: 
       - "/:/rootfs"
