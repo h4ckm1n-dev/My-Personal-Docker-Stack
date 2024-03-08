@@ -20,6 +20,96 @@ scrape_configs:
     static_configs:
       - targets: ['cadvisor:8080']
 ```
+promtail config.yaml
+```
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: system
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: varlogs
+          __path__: /var/log/*log
+
+  - job_name: journal
+    journal:
+      max_age: 12h
+      labels:
+        job: systemd-journal
+    relabel_configs:
+      - source_labels: ['__journal__systemd_unit']
+        target_label: 'unit'
+
+  - job_name: docker_containers
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: docker_logs
+          __path__: /var/lib/docker/containers/*/*.log
+```
+loki local-config.yaml
+```auth_enabled: false
+
+server:
+  http_listen_port: 3100
+
+ingester:
+  lifecycler:
+    address: 127.0.0.1
+    ring:
+      kvstore:
+        store: inmemory
+      replication_factor: 1
+  chunk_idle_period: 1h
+  chunk_retain_period: 24h
+  max_transfer_retries: 3
+
+schema_config:
+  configs:
+  - from: 2020-10-24
+    store: boltdb-shipper
+    object_store: filesystem
+    schema: v11
+    index:
+      prefix: index_
+      period: 24h
+
+storage_config:
+  boltdb_shipper:
+    active_index_directory: /var/lib/loki/index
+    cache_location: /var/lib/loki/index_cache
+    shared_store: filesystem
+  filesystem:
+    directory: /var/lib/loki/chunks
+
+limits_config:
+  enforce_metric_name: true
+  reject_old_samples: true
+  reject_old_samples_max_age: 720h
+
+chunk_store_config:
+  max_look_back_period: 24h
+
+table_manager:
+  retention_deletes_enabled: true
+  retention_period: 720h
+
+ingestion_rate_limiter:
+  enabled: true
+  burst_size_bytes: 4194304 # 4MB/s, adjust as necessary
+  ingestion_rate_bytes: 4194304 # 4MB/s, adjust as necessary
+```
 Run Docker Compose to start your services:
 ```
 docker-compose up -d
