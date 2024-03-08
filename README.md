@@ -20,7 +20,7 @@ scrape_configs:
     static_configs:
       - targets: ['cadvisor:8080']
 ```
-promtail config.yaml
+promtail config.yaml /etc/promtail/config.yaml
 ```
 server:
   http_listen_port: 9080
@@ -58,8 +58,9 @@ scrape_configs:
           job: docker_logs
           __path__: /var/lib/docker/containers/*/*.log
 ```
-loki local-config.yaml
-```auth_enabled: false
+loki local-config.yaml /etc/loki/local-config.yaml
+```
+auth_enabled: false
 
 server:
   http_listen_port: 3100
