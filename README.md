@@ -25,12 +25,13 @@ Run Docker Compose to start your services:
 docker-compose up -d
 ```
 # Access the UIs:
-```
 
-```
 Grafana: http://localhost:3000
+
 Prometheus: http://localhost:9090
+
 cAdvisor: http://localhost:8080
+
 Set up Grafana:
 
 After logging in to Grafana, add Prometheus as a data source by navigating to Configuration > Data Sources > Add data source, and select Prometheus.
