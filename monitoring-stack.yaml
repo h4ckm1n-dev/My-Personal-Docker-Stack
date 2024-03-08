@@ -15,6 +15,16 @@ services:
       - "9090:9090"
     restart: unless-stopped
 
+  alertmanager:
+    image: prom/alertmanager:v0.23.0
+    volumes:
+      - /etc/alertmanager:/etc/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+    ports:
+      - "9093:9093"
+    restart: unless-stopped
+
   grafana:
     image: grafana/grafana:8.4.5
     depends_on:
