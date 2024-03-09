@@ -1,0 +1,140 @@
+version: '3.8'
+
+services:
+  traefik:
+    image: traefik:v2.5
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.myresolver.acme.email=youremail@example.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "letsencrypt:/letsencrypt"
+    networks:
+      - monitoring_network
+    restart: unless-stopped
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    network_mode: "host"
+    volumes:
+      - open-webui:/app/backend/data
+    environment:
+      - OLLAMA_API_BASE_URL=http://127.0.0.1:11434/api
+    restart: always
+    
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    restart: unless-stopped
+    networks:
+      - monitoring_network
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    volumes:
+      - /etc/alertmanager:/etc/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+    restart: unless-stopped
+    networks:
+      - monitoring_network
+
+  grafana:
+    image: grafana/grafana:latest
+    depends_on:
+      - prometheus
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.yourdomain.com`)"
+      - "traefik.http.routers.grafana.entrypoints=websecure"
+      - "traefik.http.routers.grafana.tls.certresolver=myresolver"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - monitoring_network
+    restart: unless-stopped
+
+  nodeexporter:
+    image: prom/node-exporter:latest
+    volumes:
+      - "/:/host:ro,rslave"
+    command:
+      - '--path.rootfs=/host'
+    restart: unless-stopped
+    networks:
+      - monitoring_network
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    volumes: 
+      - "/:/rootfs"
+      - "/var/run:/var/run"
+      - "/sys:/sys"
+      - "/var/lib/docker/:/var/lib/docker"
+      - "/dev/disk/:/dev/disk"
+    privileged: true
+    devices: 
+      - "/dev/kmsg"
+    restart: unless-stopped
+    networks:
+      - monitoring_network
+
+  loki:
+    image: grafana/loki:latest
+    command:
+      - -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - loki_data:/loki
+    restart: unless-stopped
+    networks:
+      - monitoring_network
+
+  promtail:
+    image: grafana/promtail:latest
+    volumes:
+      - "/var/log:/var/log"
+      - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
+      - "/etc/promtail:/etc/promtail"
+    command:
+      - -config.file=/etc/promtail/config.yml
+    restart: unless-stopped
+    networks:
+      - monitoring_network
+
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    command:
+      - --interval 30
+    restart: unless-stopped
+    networks:
+      - monitoring_network
+
+volumes:
+  open-webui:
+  prometheus_data:
+  grafana_data:
+  loki_data:
+  letsencrypt:
+
+networks:
+  monitoring_network:
+    driver: bridge
