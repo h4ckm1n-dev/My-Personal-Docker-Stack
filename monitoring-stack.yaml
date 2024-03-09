@@ -7,7 +7,7 @@ services:
     volumes:
       - open-webui:/app/backend/data
     environment:
-      - OLLAMA_API_BASE_URL=http://127.0.0.1:11434/api
+      - OLLAMA_API_BASE_URL=http://127.0.0.1:11434
     restart: always
     
   prometheus:
