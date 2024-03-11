@@ -103,13 +103,6 @@ services:
     restart: unless-stopped
     networks:
       - monitoring_network
-  nvidia-smi-exporter:
-    image: peterdemartini/nvidia-smi-exporter:latest
-    ports:
-      - "9114:9114"
-    restart: unless-stopped
-    networks:
-      - monitoring_network
       
 volumes:
   open-webui:
