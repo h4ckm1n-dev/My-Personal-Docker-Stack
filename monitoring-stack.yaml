@@ -103,26 +103,7 @@ services:
     restart: unless-stopped
     networks:
       - monitoring_network
-
-  nvidia_gpu_exporter:
-    image: mindprince/nvidia_gpu_prometheus_exporter:0.1
-    ports:
-      - "9445:9445"
-    restart: unless-stopped
-    networks:
-      - monitoring_network
-
-  watchtower:
-    image: containrrr/watchtower
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    command:
-      - --interval
-      - "30"
-    restart: unless-stopped
-    networks:
-      - monitoring_network
-
+      
 volumes:
   open-webui:
   prometheus_data:
