@@ -104,6 +104,14 @@ services:
     networks:
       - monitoring_network
 
+  nvidia_gpu_exporter:
+    image: wjimenez5271/nvidia_gpu_prometheus_exporter:latest
+    ports:
+      - "9445:9445"
+    restart: unless-stopped
+    networks:
+      - monitoring_network
+
   watchtower:
     image: containrrr/watchtower
     volumes:
