@@ -105,7 +105,7 @@ services:
       - monitoring_network
 
   nvidia_gpu_exporter:
-    image: mindprince/nvidia_gpu_prometheus_exporter
+    image: mindprince/nvidia_gpu_prometheus_exporter:0.1
     ports:
       - "9445:9445"
     restart: unless-stopped
