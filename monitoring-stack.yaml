@@ -27,7 +27,7 @@ services:
       - monitoring_network
 
   alertmanager:
-    image: prom/alertmanager:v0.21.0-rc.0
+    image: prom/alertmanager:v0.27.0-rc.0
     volumes:
       - /etc/alertmanager:/etc/alertmanager
       - alertmanager_data:/alertmanager
