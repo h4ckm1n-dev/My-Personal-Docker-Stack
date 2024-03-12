@@ -103,7 +103,15 @@ services:
     restart: unless-stopped
     networks:
       - monitoring_network
-      
+
+  nvidia-cuda-exporter:
+    image: corosif/nvidia-cuda-exporter:0.0.1
+    ports:
+      - "8888:8888"
+    restart: unless-stopped
+    networks:
+      - monitoring_network
+
 volumes:
   open-webui:
   prometheus_data:
