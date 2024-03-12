@@ -123,6 +123,15 @@ services:
           - driver: nvidia
             count: all
             capabilities: [gpu]
+  watchtower:
+    image: containrrr/watchtower:v1.7.0
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    command:
+      - --interval 30
+    restart: unless-stopped
+    networks:
+      - monitoring_network
 
 volumes:
   open-webui:
