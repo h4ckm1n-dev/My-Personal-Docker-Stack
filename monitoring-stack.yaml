@@ -11,7 +11,7 @@ services:
     restart: always
     
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:v2.23.0
     volumes:
       - /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
@@ -27,7 +27,7 @@ services:
       - monitoring_network
 
   alertmanager:
-    image: prom/alertmanager:latest
+    image: prom/alertmanager:v0.21.0-rc.0
     volumes:
       - /etc/alertmanager:/etc/alertmanager
       - alertmanager_data:/alertmanager
@@ -40,7 +40,7 @@ services:
       - monitoring_network
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:10.0.12
     depends_on:
       - prometheus
     volumes:
@@ -52,7 +52,7 @@ services:
       - monitoring_network
 
   nodeexporter:
-    image: prom/node-exporter:latest
+    image: prom/node-exporter:v1.7.0
     volumes:
       - "/:/host:ro,rslave"
     command:
@@ -81,7 +81,7 @@ services:
       - monitoring_network
 
   loki:
-    image: grafana/loki:latest
+    image: grafana/loki:2.9.4
     ports:
       - "3100:3100"
     command:
@@ -93,7 +93,7 @@ services:
       - monitoring_network
 
   promtail:
-    image: grafana/promtail:latest
+    image: grafana/promtail:2.9.4
     volumes:
       - "/var/log:/var/log"
       - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
