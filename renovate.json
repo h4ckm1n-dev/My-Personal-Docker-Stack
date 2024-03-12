@@ -2,7 +2,7 @@
   "extends": ["config:base"],
   "packageRules": [
     {
-      "matchFilePatterns": ["^monitoring-stack\\.yaml$", "^monitoring-traefik\\.yaml$"],
+      "matchFiles": ["^monitoring-stack\\.yaml$", "^monitoring-traefik\\.yaml$"],
       "matchUpdateTypes": ["major", "minor", "patch"],
       "dependencyDashboard": true,
       "groupName": "monitoring-stack-updates",
