@@ -13,9 +13,8 @@
       "dependencyDashboard": true
     }
   ],
-  "customManagers": [
+  "regexManagers": [
     {
-      "name": "customDockerCompose",
       "fileMatch": ["^monitoring-stack\\.yaml$", "^monitoring-traefik\\.yaml$"],
       "matchStrings": ["image:\\s?(?<depName>[\\w\\-/]+):(?<currentValue>[\\w\\-\\.]+)"],
       "datasourceTemplate": "docker"
