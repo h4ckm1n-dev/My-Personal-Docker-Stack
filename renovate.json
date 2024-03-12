@@ -18,6 +18,11 @@
       "matchDepTypes": ["docker"],
       "matchPackagePatterns": ["^monitoring-stack", "^monitoring-traefik"],
       "groupName": "monitoring-stack-updates" 
+    },
+    {
+      "matchDepTypes": ["docker"],
+      "matchPackagePatterns": ["^cadvisor"],
+      "groupName": "cadvisor-updates"
     }
   ],
   "regexManagers": [
