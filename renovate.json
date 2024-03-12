@@ -20,6 +20,6 @@
       "datasourceTemplate": "docker"
     }
   ],
-  "prHourlyLimit": 5, // Limit the number of Pull Requests created to 5 per hour
-  "rateLimitPerHour": 100 // Limit the number of API calls to 50 per hour
+  "prHourlyLimit": 5,
+  "rateLimitPerHour": 100
 }
