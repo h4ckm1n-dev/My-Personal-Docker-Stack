@@ -7,8 +7,9 @@
       "matchManagers": ["dockerfile"],
       "dependencyDashboard": true
     },
-        {
+    {
       "managers": ["docker-compose"],
+      "fileMatch": ["^monitoring-stack\\.yaml$", "^monitoring-traefik\\.yaml$"],
       "matchUpdateTypes": ["major", "minor", "patch"],
       "dependencyDashboard": true
     },
