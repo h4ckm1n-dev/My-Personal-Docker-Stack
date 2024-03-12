@@ -20,6 +20,4 @@
       "datasourceTemplate": "docker"
     }
   ],
-  "prHourlyLimit": 5,
-  "rateLimitPerHour": 100
 }
