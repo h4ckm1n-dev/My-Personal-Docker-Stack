@@ -6,18 +6,18 @@
       "matchUpdateTypes": ["major", "minor", "patch"],
       "matchManagers": ["dockerfile"],
       "dependencyDashboard": true,
-      "groupName": "docker-updates" // Group Docker updates
+      "groupName": "docker-updates"
     },
     {
       "matchManagers": ["pip_requirements"],
       "matchPackagePatterns": ["*"],
       "dependencyDashboard": true,
-      "groupName": "python-updates" // Group Python updates
+      "groupName": "python-updates" 
     },
     {
       "matchDepTypes": ["docker"],
       "matchPackagePatterns": ["^monitoring-stack", "^monitoring-traefik"],
-      "groupName": "monitoring-stack-updates" // Group updates for monitoring-stack and monitoring-traefik
+      "groupName": "monitoring-stack-updates" 
     }
   ],
   "regexManagers": [
