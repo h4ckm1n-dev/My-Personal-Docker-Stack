@@ -40,7 +40,7 @@ services:
       - monitoring_network
 
   grafana:
-    image: grafana/grafana:10.0.12
+    image: grafana/grafana:10.4.0
     depends_on:
       - prometheus
     volumes:
