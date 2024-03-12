@@ -6,7 +6,7 @@
       "matchUpdateTypes": ["major", "minor", "patch"],
       "dependencyDashboard": true,
       "groupName": "monitoring-stack-updates",
-      "packagePatterns": ["cadvisor", "regex", "prom/prometheus", "prom/alertmanager", "grafana/grafana", "prom/node-exporter", "grafana/loki", "grafana/promtail", "corosif/nvidia-cuda-exporter"]
+      "packagePatterns": ["cadvisor", "regex", "prom/prometheus", "gcr.io/cadvisor/cadvisor", "prom/alertmanager", "grafana/grafana", "prom/node-exporter", "grafana/loki", "grafana/promtail", "corosif/nvidia-cuda-exporter"]
     }
   ],
   "regexManagers": [
