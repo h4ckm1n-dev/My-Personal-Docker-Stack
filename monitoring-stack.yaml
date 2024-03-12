@@ -113,6 +113,9 @@ services:
     restart: unless-stopped
     networks:
       - monitoring_network
+    environment:
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: all
 
 volumes:
   open-webui:
