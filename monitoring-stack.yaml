@@ -124,7 +124,7 @@ services:
             count: all
             capabilities: [gpu]
   watchtower:
-    image: containrrr/watchtower:v1.7.0
+    image: containrrr/watchtower:1.7.1
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     command:
