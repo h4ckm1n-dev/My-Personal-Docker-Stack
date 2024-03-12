@@ -2,21 +2,11 @@
   "extends": ["config:base"],
   "packageRules": [
     {
-      "matchFilePatterns": ["^monitoring-stack\\.yaml$", "^monitoring-traefik\\.yaml$"],
+      "matchFiles": ["^monitoring-stack\\.yaml$", "^monitoring-traefik\\.yaml$"],
       "matchUpdateTypes": ["major", "minor", "patch"],
       "dependencyDashboard": true,
       "groupName": "monitoring-stack-updates",
-      "packagePatterns": ["regex", "prom/prometheus", "cadvisor/cadvisor", "prom/alertmanager", "grafana/grafana", "prom/node-exporter", "grafana/loki", "grafana/promtail", "corosif/nvidia-cuda-exporter"]
-    }
-  ],
-  "packageManagers": [
-    {
-      "depTypeList": ["docker"],
-      "docker": {
-        "registryUrls": [
-          "https://gcr.io"
-        ]
-      }
+      "packagePatterns": ["cadvisor", "regex", "prom/prometheus", "gcr.io/cadvisor/cadvisor", "prom/alertmanager", "grafana/grafana", "prom/node-exporter", "grafana/loki", "grafana/promtail", "corosif/nvidia-cuda-exporter"]
     }
   ],
   "regexManagers": [
