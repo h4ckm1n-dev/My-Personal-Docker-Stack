@@ -105,7 +105,8 @@ services:
       - monitoring_network
 
   nvidia-cuda-exporter:
-    image: corosif/nvidia-cuda-exporter:0.0.1
+    container_name: my-nvidia-exporter
+    image: nvidia-cuda-exporter
     ports:
       - "8888:8888"
     volumes:
@@ -116,6 +117,13 @@ services:
     environment:
       NVIDIA_VISIBLE_DEVICES: all
       NVIDIA_DRIVER_CAPABILITIES: all
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]
 
 volumes:
   open-webui:
