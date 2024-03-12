@@ -106,8 +106,11 @@ services:
 
   nvidia-cuda-exporter:
     image: corosif/nvidia-cuda-exporter:0.0.1
+    runtime: nvidia
     ports:
       - "8888:8888"
+    volumes:
+      - /usr/local/nvidia:/usr/local/nvidia
     restart: unless-stopped
     networks:
       - monitoring_network
