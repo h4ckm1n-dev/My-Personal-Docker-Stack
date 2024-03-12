@@ -19,5 +19,5 @@
       "matchStrings": ["image:\\s?(?<depName>[\\w\\-/]+):(?<currentValue>[\\w\\-\\.]+)"],
       "datasourceTemplate": "docker"
     }
-  ],
+  ]
 }
