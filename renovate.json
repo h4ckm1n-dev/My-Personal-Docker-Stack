@@ -2,27 +2,11 @@
   "extends": ["config:base"],
   "packageRules": [
     {
-      "matchDatasources": ["docker"],
+      "matchFilePatterns": ["^monitoring-stack\\.yaml$", "^monitoring-traefik\\.yaml$"],
       "matchUpdateTypes": ["major", "minor", "patch"],
-      "matchManagers": ["dockerfile"],
       "dependencyDashboard": true,
-      "groupName": "docker-updates"
-    },
-    {
-      "matchManagers": ["pip_requirements"],
-      "matchPackagePatterns": ["*"],
-      "dependencyDashboard": true,
-      "groupName": "python-updates" 
-    },
-    {
-      "matchDepTypes": ["docker"],
-      "matchPackagePatterns": ["^monitoring-stack", "^monitoring-traefik"],
-      "groupName": "monitoring-stack-updates" 
-    },
-    {
-      "matchDepTypes": ["docker"],
-      "matchPackagePatterns": ["^cadvisor"],
-      "groupName": "cadvisor-updates"
+      "groupName": "monitoring-stack-updates",
+      "packagePatterns": ["regex", "prom/prometheus", "prom/alertmanager", "grafana/grafana", "prom/node-exporter", "grafana/loki", "grafana/promtail", "corosif/nvidia-cuda-exporter"]
     }
   ],
   "regexManagers": [
