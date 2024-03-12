@@ -8,10 +8,12 @@
       "dependencyDashboard": true
     },
     {
-      "managers": ["docker-compose"],
+  "customManagers": [
+    {
+      "name": "customDockerCompose",
       "fileMatch": ["^monitoring-stack\\.yaml$", "^monitoring-traefik\\.yaml$"],
-      "matchUpdateTypes": ["major", "minor", "patch"],
-      "dependencyDashboard": true
+      "matchStrings": ["image:\\s?(?<depName>[\\w\\-/]+):(?<currentValue>[\\w\\-\\.]+)"],
+      "datasourceTemplate": "docker"
     },
     {
       "matchManagers": ["pip_requirements"],
