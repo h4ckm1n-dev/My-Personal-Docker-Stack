@@ -5,19 +5,22 @@
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["major", "minor", "patch"],
       "matchManagers": ["dockerfile"],
-      "dependencyDashboard": true
+      "dependencyDashboard": true,
+      "groupName": "docker-updates" // Group name for Docker updates
     },
     {
       "matchManagers": ["pip_requirements"],
       "matchPackagePatterns": ["*"],
-      "dependencyDashboard": true
+      "dependencyDashboard": true,
+      "groupName": "python-updates" // Group name for Python updates
     }
   ],
   "regexManagers": [
     {
       "fileMatch": ["^monitoring-stack\\.yaml$", "^monitoring-traefik\\.yaml$"],
       "matchStrings": ["image:\\s?(?<depName>[\\w\\-/]+):(?<currentValue>[\\w\\-\\.]+)"],
-      "datasourceTemplate": "docker"
+      "datasourceTemplate": "docker",
+      "groupName": "monitoring-stack-updates" // Group name for specific YAML file updates
     }
   ]
 }
