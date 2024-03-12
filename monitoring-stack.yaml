@@ -106,7 +106,6 @@ services:
 
   nvidia-cuda-exporter:
     image: corosif/nvidia-cuda-exporter:0.0.1
-    runtime: nvidia
     ports:
       - "8888:8888"
     volumes:
