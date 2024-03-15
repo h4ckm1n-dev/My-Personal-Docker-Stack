@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   open-webui:
@@ -9,17 +9,17 @@ services:
     environment:
       - OLLAMA_BASE_URLS=http://127.0.0.1:11434
     restart: always
-    
+
   prometheus:
     image: prom/prometheus:v2.50.1
     volumes:
       - /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
-      - '--web.console.templates=/usr/share/prometheus/consoles'
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      - "--web.console.templates=/usr/share/prometheus/consoles"
     ports:
       - "9090:9090"
     restart: unless-stopped
@@ -32,7 +32,7 @@ services:
       - /etc/alertmanager:/etc/alertmanager
       - alertmanager_data:/alertmanager
     command:
-      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - "--config.file=/etc/alertmanager/alertmanager.yml"
     ports:
       - "9093:9093"
     restart: unless-stopped
@@ -56,7 +56,7 @@ services:
     volumes:
       - "/:/host:ro,rslave"
     command:
-      - '--path.rootfs=/host'
+      - "--path.rootfs=/host"
     ports:
       - "9100:9100"
     restart: unless-stopped
@@ -65,14 +65,14 @@ services:
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.49.1
-    volumes: 
+    volumes:
       - "/:/rootfs"
       - "/var/run:/var/run"
       - "/sys:/sys"
       - "/var/lib/docker/:/var/lib/docker"
       - "/dev/disk/:/dev/disk"
     privileged: true
-    devices: 
+    devices:
       - "/dev/kmsg"
     ports:
       - "8880:8080"
@@ -120,9 +120,9 @@ services:
       resources:
         reservations:
           devices:
-          - driver: nvidia
-            count: all
-            capabilities: [gpu]
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
   watchtower:
     image: containrrr/watchtower:1.7.1
     volumes:

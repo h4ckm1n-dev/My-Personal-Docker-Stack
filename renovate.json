@@ -1,18 +1,43 @@
 {
-  "extends": ["config:base"],
+  "extends": [
+    "config:extended"
+  ],
   "packageRules": [
     {
-      "matchFiles": ["^monitoring-stack\\.yaml$", "^monitoring-traefik\\.yaml$"],
-      "matchUpdateTypes": ["major", "minor", "patch"],
+      "matchFiles": [
+        "^monitoring-stack\\.yaml$",
+        "^monitoring-traefik\\.yaml$"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch"
+      ],
       "dependencyDashboard": true,
       "groupName": "monitoring-stack-updates",
-      "packagePatterns": ["cadvisor", "regex", "prom/prometheus", "gcr.io/cadvisor/cadvisor", "prom/alertmanager", "grafana/grafana", "prom/node-exporter", "grafana/loki", "grafana/promtail", "corosif/nvidia-cuda-exporter"]
+      "packagePatterns": [
+        "cadvisor",
+        "regex",
+        "prom/prometheus",
+        "gcr.io/cadvisor/cadvisor",
+        "prom/alertmanager",
+        "grafana/grafana",
+        "prom/node-exporter",
+        "grafana/loki",
+        "grafana/promtail",
+        "corosif/nvidia-cuda-exporter"
+      ]
     }
   ],
   "regexManagers": [
     {
-      "fileMatch": ["^monitoring-stack\\.yaml$", "^monitoring-traefik\\.yaml$"],
-      "matchStrings": ["image:\\s?(?<depName>[\\w\\-/]+):(?<currentValue>[\\w\\-\\.]+)"],
+      "fileMatch": [
+        "^monitoring-stack\\.yaml$",
+        "^monitoring-traefik\\.yaml$"
+      ],
+      "matchStrings": [
+        "image:\\s?(?<depName>[\\w\\-/]+):(?<currentValue>[\\w\\-\\.]+)"
+      ],
       "datasourceTemplate": "docker"
     }
   ]
