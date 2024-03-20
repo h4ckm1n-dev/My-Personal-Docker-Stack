@@ -33,7 +33,7 @@ services:
     restart: always
     
   prometheus:
-    image: prom/prometheus:v2.50.1
+    image: prom/prometheus:v2.51.0
     volumes:
       - /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
