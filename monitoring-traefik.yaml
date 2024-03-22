@@ -31,6 +31,8 @@ services:
       - "traefik.http.routers.ollama.rule=Host(`ollama.h4ckm1n.org`)"
       - "traefik.http.routers.ollama.entrypoints=websecure"
       - "traefik.http.routers.ollama.tls.certresolver=myresolver"
+    ports:
+      - "8088:8088"
     volumes:
       - open-webui:/app/backend/data
     environment:
