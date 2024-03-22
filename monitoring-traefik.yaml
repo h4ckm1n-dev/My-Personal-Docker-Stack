@@ -35,8 +35,7 @@ services:
 
   grafana:
     image: grafana/grafana:10.4.1
-    depends_on:
-      - prometheus
+
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.grafana.rule=Host(`grafana.h4ckm1n.org`)"
