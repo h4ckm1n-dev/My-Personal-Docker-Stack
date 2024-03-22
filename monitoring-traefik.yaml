@@ -7,15 +7,15 @@ services:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.address=:80"  # Corrected for standard HTTP port
+      - "--entrypoints.websecure.address=:443"  # Corrected for standard HTTPS port
       - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
       - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.myresolver.acme.email=mayer.julien22@gmail.com"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     ports:
-      - "8088:8080"
-      - "8443:8443"
+      - "80:80"  # Adjusted to map HTTP port
+      - "443:443"  # Adjusted to map HTTPS port
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "./acme.json:/letsencrypt/acme.json"
@@ -32,7 +32,7 @@ services:
       - "traefik.http.routers.ollama.entrypoints=websecure"
       - "traefik.http.routers.ollama.tls.certresolver=myresolver"
     ports:
-      - "8080:8080"
+      - "8080:8080"  # Ensure this is intentional and necessary
     volumes:
       - open-webui:/app/backend/data
     environment:
@@ -41,7 +41,6 @@ services:
 
   grafana:
     image: grafana/grafana:10.4.1
-
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.grafana.rule=Host(`grafana.h4ckm1n.org`)"
