@@ -26,7 +26,11 @@ services:
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
-    network_mode: "host"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ollama.rule=Host(`ollama.h4ckm1n.org`)"
+      - "traefik.http.routers.ollama.entrypoints=websecure"
+      - "traefik.http.routers.ollama.tls.certresolver=myresolver"
     volumes:
       - open-webui:/app/backend/data
     environment:
