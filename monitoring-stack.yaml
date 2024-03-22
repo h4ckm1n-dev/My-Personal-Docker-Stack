@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   open-webui:
-    image: ghcr.io/open-webui/open-webui:main
+    image: ghcr.io/open-webui/open-webui:v0.1.113
     network_mode: "host"
     volumes:
       - open-webui:/app/backend/data
