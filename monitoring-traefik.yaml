@@ -14,8 +14,8 @@ services:
       - "--certificatesresolvers.myresolver.acme.email=mayer.julien22@gmail.com"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:8080"
+      - "8443:8443"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "./acme.json:/letsencrypt/acme.json"
