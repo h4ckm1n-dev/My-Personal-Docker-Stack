@@ -48,11 +48,6 @@ services:
       - monitoring_network
     restart: unless-stopped
 
-    restart: unless-stopped
-    networks:
-      - monitoring_network
-
-
 volumes:
   open-webui:
   prometheus_data:
