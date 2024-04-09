@@ -93,7 +93,7 @@ services:
       - monitoring_network
 
   promtail:
-    image: grafana/promtail:2.9.6
+    image: grafana/promtail:3.0.0
     volumes:
       - "/var/log:/var/log"
       - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
