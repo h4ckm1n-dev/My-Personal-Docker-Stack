@@ -112,7 +112,20 @@ services:
       - --interval 30
     restart: unless-stopped
     networks:
-      - network      
+      - network
+
+  blackbox-exporter:
+    image: prom/blackbox-exporter:v0.25.0
+    volumes:
+      - "/etc/blackbox/:/config/"
+    command:
+      - "--config.file=/config/blackbox.yml"
+    ports:
+      - "9115:9115"
+    restart: unless-stopped
+    networks:
+      - network
+      
 volumes:
   open-webui:
   prometheus_data:
