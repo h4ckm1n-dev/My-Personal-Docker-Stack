@@ -117,7 +117,7 @@ services:
   blackbox-exporter:
     image: prom/blackbox-exporter:v0.25.0
     volumes:
-      - /etc/blackbox/blackbox.yml:/config/blackbox.yml
+      - "/etc/blackbox/blackbox.yml:/config/blackbox.yml"
     command:
       - "--config.file=/config/blackbox.yml"
     ports:
