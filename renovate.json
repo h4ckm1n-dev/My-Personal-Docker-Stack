@@ -24,8 +24,7 @@
         "grafana/grafana",
         "prom/node-exporter",
         "grafana/loki",
-        "grafana/promtail",
-        "corosif/nvidia-cuda-exporter"
+        "grafana/promtail"
       ]
     }
   ],
