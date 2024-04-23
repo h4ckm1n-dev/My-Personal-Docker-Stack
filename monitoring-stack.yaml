@@ -125,7 +125,7 @@ services:
     restart: unless-stopped
     networks:
       - network
-      
+
 volumes:
   open-webui:
   prometheus_data:
