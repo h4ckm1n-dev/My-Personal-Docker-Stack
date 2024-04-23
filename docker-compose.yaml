@@ -40,7 +40,7 @@ services:
       - network
 
   grafana:
-    image: grafana/grafana:9.5.18
+    image: grafana/grafana:10.4.2
     depends_on:
       - prometheus
     volumes:
