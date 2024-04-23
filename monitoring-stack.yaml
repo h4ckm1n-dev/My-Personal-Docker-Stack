@@ -115,7 +115,7 @@ services:
       - network
 
   blackbox-exporter:
-    image: prom/blackbox-exporter:v0.25.0
+    image: bitnami/blackbox-exporter:0.25.0
     volumes:
       - "/etc/blackbox/:/config/"
     command:
