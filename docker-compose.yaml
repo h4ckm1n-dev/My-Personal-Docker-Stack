@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   open-webui:
-    image: ghcr.io/open-webui/open-webui:v0.1.120
+    image: ghcr.io/open-webui/open-webui:v0.1.110
     network_mode: "host"
     volumes:
       - open-webui:/app/backend/data
@@ -27,7 +27,7 @@ services:
       - network
 
   alertmanager:
-    image: prom/alertmanager:v0.27.0-rc.0
+    image: prom/alertmanager:v0.17.0-rc.0
     volumes:
       - /etc/alertmanager:/etc/alertmanager
       - alertmanager_data:/alertmanager
@@ -40,7 +40,7 @@ services:
       - network
 
   grafana:
-    image: grafana/grafana:10.4.2
+    image: grafana/grafana:9.4.2
     depends_on:
       - prometheus
     volumes:
