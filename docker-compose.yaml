@@ -13,7 +13,7 @@ services:
   prometheus:
     image: prom/prometheus:v2.51.2
     volumes:
-      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml  # Mount the config file directly
       - prometheus_data:/prometheus
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
@@ -29,7 +29,7 @@ services:
   alertmanager:
     image: prom/alertmanager:v0.27.0-rc.0
     volumes:
-      - ./config/alertmanager:/etc/alertmanager
+      - ./config/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml  # Ensure the correct file path
       - alertmanager_data:/alertmanager
     command:
       - "--config.file=/etc/alertmanager/alertmanager.yml"
@@ -83,7 +83,7 @@ services:
   loki:
     image: grafana/loki:3.0.0
     volumes:
-      - ./config/loki/local-config.yaml:/etc/loki/local-config.yaml
+      - ./config/loki/local-config.yaml:/etc/loki/local-config.yaml  # Direct file mount
       - loki_data:/loki
     command:
       - -config.file=/etc/loki/local-config.yaml
@@ -96,7 +96,7 @@ services:
   promtail:
     image: grafana/promtail:3.0.0
     volumes:
-      - "./config/promtail/config.yml:/etc/promtail/config.yml"
+      - ./config/promtail/config.yml:/etc/promtail/config.yml  # Ensure the correct file path
       - "/var/log:/var/log"
       - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
     command:
@@ -118,7 +118,7 @@ services:
   blackbox-exporter:
     image: bitnami/blackbox-exporter:0.25.0
     volumes:
-      - "./config/blackbox/blackbox.yml:/config/blackbox.yml"
+      - ./config/blackbox/blackbox.yml:/config/blackbox.yml  # Direct file mount
     command:
       - "--config.file=/config/blackbox.yml"
     ports:
