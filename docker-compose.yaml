@@ -104,16 +104,6 @@ services:
     networks:
       - network
 
-  watchtower:
-    image: containrrr/watchtower:1.7.1
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    command:
-      - --interval 30
-    restart: unless-stopped
-    networks:
-      - network
-
   blackbox-exporter:
     image: bitnami/blackbox-exporter:0.25.0
     volumes:
