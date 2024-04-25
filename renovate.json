@@ -1,8 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
+  "extends": ["config:recommended"],
   "packageRules": [
     {
       "groupName": "all patch dependencies",
@@ -10,7 +8,10 @@
       "matchPackagePatterns": ["*"],
       "matchUpdateTypes": ["patch"],
       "automerge": true,
-      "automergeSchedule": ["after 10pm every weekday", "before 5am every weekday"]
+      "schedule": [
+        "after 10pm and before 5am on Monday, Tuesday, Wednesday, Thursday"
+      ],
+      "labels": ["dependencies", "patch"]
     },
     {
       "groupName": "all minor dependencies",
@@ -18,13 +19,24 @@
       "matchPackagePatterns": ["*"],
       "matchUpdateTypes": ["minor"],
       "automerge": true,
-      "automergeSchedule": ["after 10pm every weekday", "before 5am every weekday"]
+      "schedule": [
+        "after 10pm and before 5am on Monday, Tuesday, Wednesday, Thursday"
+      ],
+      "labels": ["dependencies", "minor"]
     },
     {
-      "description": "Automatically merge pin updates",
-      "matchUpdateTypes": ["pin"],
-      "automerge": true,
-      "automergeSchedule": ["after 10pm every weekday", "before 5am every weekday"]
+      "groupName": "all major dependencies",
+      "groupSlug": "all-majors",
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "labels": ["dependencies", "major"],
+      "minimumReleaseAge": "7 days"
     }
-  ]
+  ],
+  "automergeType": "branch",
+  "automerge": true,
+  "requiredStatusChecks": null,
+  "dependencyDashboard": true,
+  "timezone": "Europe/Paris"
 }
