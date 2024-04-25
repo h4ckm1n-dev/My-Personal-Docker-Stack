@@ -6,22 +6,17 @@ services:
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
-      DB_VENDOR: postgresql
-    ports:
-      - "8088:8080"
-    command:
-      - start  # This command starts Keycloak in production mode
-    restart: always
-    networks:
-      - network
-    environment:
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
       DB_VENDOR: postgres
       DB_ADDR: postgres
       DB_DATABASE: keycloak
       DB_USER: keycloak
       DB_PASSWORD: password
+    ports:
+      - "8088:8080"
+    restart: always
+    networks:
+      - network
+
   postgres:
     image: postgres:latest
     environment:
@@ -32,6 +27,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - network
+      
   open-webui:
     image: ghcr.io/open-webui/open-webui:0.1.121
     network_mode: "host"
