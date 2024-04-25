@@ -11,7 +11,7 @@ services:
     restart: always
 
   keycloak:
-    image: jboss/keycloak:19.0.1
+    image: keycloak/keycloak:19.0.1
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
