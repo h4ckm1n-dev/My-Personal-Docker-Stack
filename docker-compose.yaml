@@ -149,6 +149,7 @@ volumes:
   grafana_data:
   loki_data:
   alertmanager_data:
+  postgres_data:
 
 networks:
   network:
