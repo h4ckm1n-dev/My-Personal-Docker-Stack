@@ -37,18 +37,6 @@ services:
       - OLLAMA_BASE_URLS=http://127.0.0.1:11434
     restart: always
 
-  keycloak:
-    image: keycloak/keycloak:24.0.3
-    environment:
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
-      DB_VENDOR: h2
-    ports:
-      - "8088:8080"
-    restart: always
-    networks:
-      - network
-
   prometheus:
     image: prom/prometheus:v2.51.2
     volumes:
