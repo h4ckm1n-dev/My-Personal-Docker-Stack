@@ -144,7 +144,7 @@ services:
       - network
   
   nvidia-cuda-exporter:
-    image: corosif/nvidia-cuda-exporter:0:0:2
+    image: corosif/nvidia-cuda-exporter:0.0.2
     runtime: nvidia
     command: --name nvidia-cuda-exporter --gpus all -p 8888:8888 -v /usr/local/nvidia:/usr/local/nvidia nvidia-cuda-exporter
     networks:
