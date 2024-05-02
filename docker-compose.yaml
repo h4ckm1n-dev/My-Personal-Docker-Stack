@@ -142,6 +142,19 @@ services:
     restart: unless-stopped
     networks:
       - network
+
+  nvidia-cuda-exporter:
+    image: corosif/nvidia-cuda-exporter
+    container_name: nvidia-cuda-exporter
+    ports:
+      - "8888:8888"
+    volumes:
+      - "/usr/local/nvidia:/usr/local/nvidia"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: ["gpu"]
       
 volumes:
   open-webui:
