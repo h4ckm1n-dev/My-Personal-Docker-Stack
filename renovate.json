@@ -12,7 +12,6 @@
         "after 10pm and before 5am on Monday, Tuesday, Wednesday, Thursday"
       ],
       "labels": ["dependencies", "patch"]
-      "minimumReleaseAge": "3 days"
     },
     {
       "groupName": "all minor dependencies",
@@ -24,7 +23,6 @@
         "after 10pm and before 5am on Monday, Tuesday, Wednesday, Thursday"
       ],
       "labels": ["dependencies", "minor"]
-      "minimumReleaseAge": "3 days"
     },
     {
       "groupName": "all major dependencies",
