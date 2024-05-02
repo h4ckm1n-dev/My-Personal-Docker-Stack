@@ -27,7 +27,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - network
-      
+
   open-webui:
     image: ghcr.io/open-webui/open-webui:0.1.121
     network_mode: "host"
@@ -142,7 +142,19 @@ services:
     restart: unless-stopped
     networks:
       - network
-      
+
+  nvidia-cuda-exporter:
+    image: corosif/nvidia-cuda-exporter:0.0.1
+    container_name: nvidia-cuda-exporter
+    ports:
+      - "8888:8888"
+    volumes:
+      - "/usr/local/nvidia:/usr/local/nvidia"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: ["gpu"]
 volumes:
   open-webui:
   prometheus_data:

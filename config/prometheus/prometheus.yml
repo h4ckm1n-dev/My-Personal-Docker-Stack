@@ -17,7 +17,7 @@ scrape_configs:
   - job_name: "nvidia-cuda-exporter"
     static_configs:
       - targets: ["nvidia-cuda-exporter:8888"]
-      
+
   - job_name: "blackbox-https"
     metrics_path: /probe
     params:
@@ -25,11 +25,6 @@ scrape_configs:
     static_configs:
       - targets:
           - https://google.com
-          - https://amazon.com
-          - https://openai.com
-          - https://facebook.com
-          - https://instagram.com
-          - https://youtube.com
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
