@@ -154,6 +154,8 @@ services:
         reservations:
           devices:
             - capabilities: ["gpu"]
+    networks:
+    - network
       
 volumes:
   open-webui:
