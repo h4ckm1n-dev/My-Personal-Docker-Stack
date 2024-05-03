@@ -53,19 +53,6 @@ services:
     networks:
       - network
 
-  alertmanager:
-    image: prom/alertmanager:v0.27.0-rc.0
-    volumes:
-      - /etc/alertmanager:/etc/alertmanager
-      - alertmanager_data:/alertmanager
-    command:
-      - "--config.file=/etc/alertmanager/alertmanager.yml"
-    ports:
-      - "9093:9093"
-    restart: unless-stopped
-    networks:
-      - network
-
   grafana:
     image: grafana/grafana:10.4.2
     depends_on:
