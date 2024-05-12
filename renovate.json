@@ -5,22 +5,6 @@
   ],
   "packageRules": [
     {
-      "groupName": "all minor dependencies",
-      "groupSlug": "all-minors",
-      "matchPackagePatterns": [
-        "*"
-      ],
-      "matchUpdateTypes": [
-        "minor"
-      ],
-      "automerge": true,
-      "schedule": [],
-      "labels": [
-        "dependencies",
-        "minor"
-      ]
-    },
-    {
       "groupName": "all patch dependencies",
       "groupSlug": "all-patch",
       "matchPackagePatterns": [
@@ -35,6 +19,23 @@
         "dependencies",
         "patch"
       ]
+    },
+    {
+      "groupName": "all minor dependencies",
+      "groupSlug": "all-minors",
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "automerge": true,
+      "schedule": [],
+      "labels": [
+        "dependencies",
+        "minor"
+      ],
+      "minimumReleaseAge": "3 days"
     },
     {
       "groupName": "all major dependencies",
