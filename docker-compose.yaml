@@ -18,7 +18,7 @@ services:
       - network
 
   postgres:
-    image: postgres:16.1
+    image: postgres:16.3
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
@@ -55,7 +55,7 @@ services:
       - network
 
   grafana:
-    image: grafana/grafana:10.3.2
+    image: grafana/grafana:10.4.2
     depends_on:
       - prometheus
     volumes:
@@ -67,7 +67,7 @@ services:
       - network
 
   nodeexporter:
-    image: prom/node-exporter:v1.7.0
+    image: prom/node-exporter:v1.8.0
     volumes:
       - '/:/host:ro,rslave'
     command:
