@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   keycloak:
-    image: keycloak/keycloak:23.0.4
+    image: keycloak/keycloak:24.0.2
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
@@ -96,7 +96,7 @@ services:
       - network
 
   loki:
-    image: grafana/loki:2.0.0
+    image: grafana/loki:3.0.0
     ports:
       - '3100:3100'
     command:
