@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   keycloak:
-    image: keycloak/keycloak:24.0.2
+    image: keycloak/keycloak:24.0.4
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
@@ -30,7 +30,7 @@ services:
     restart: always
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:v0.1.114
+    image: ghcr.io/open-webui/open-webui:v0.1.124
     network_mode: 'host'
     volumes:
       - open-webui:/app/backend/data
