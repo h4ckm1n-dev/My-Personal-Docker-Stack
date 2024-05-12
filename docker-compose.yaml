@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   keycloak:
-    image: keycloak/keycloak:24.0.4
+    image: keycloak/keycloak:23.0.4
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
@@ -18,7 +18,7 @@ services:
       - network
 
   postgres:
-    image: postgres:16.3
+    image: postgres:15.3
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
@@ -39,7 +39,7 @@ services:
     restart: always
 
   prometheus:
-    image: prom/prometheus:v2.52.0
+    image: prom/prometheus:v2.54.0
     volumes:
       - /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
@@ -67,7 +67,7 @@ services:
       - network
 
   nodeexporter:
-    image: prom/node-exporter:v1.8.0
+    image: prom/node-exporter:v1.7.9
     volumes:
       - '/:/host:ro,rslave'
     command:
@@ -79,7 +79,7 @@ services:
       - network
 
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:v0.49.1
+    image: gcr.io/cadvisor/cadvisor:v0.49.0
     volumes:
       - '/:/rootfs'
       - '/var/run:/var/run'
