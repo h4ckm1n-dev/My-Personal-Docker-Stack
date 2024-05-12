@@ -1,8 +1,8 @@
-version: "3.8"
+version: '3.8'
 
 services:
   keycloak:
-    image: keycloak/keycloak:24.0.4
+    image: keycloak/keycloak:23.0.4
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
@@ -12,13 +12,13 @@ services:
       DB_USER: keycloak
       DB_PASSWORD: password
     ports:
-      - "8088:8080"
+      - '8088:8080'
     restart: always
     networks:
       - network
 
   postgres:
-    image: postgres:16.2
+    image: postgres:16.1
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
@@ -30,8 +30,8 @@ services:
     restart: always
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:v0.1.124
-    network_mode: "host"
+    image: ghcr.io/open-webui/open-webui:v0.1.114
+    network_mode: 'host'
     volumes:
       - open-webui:/app/backend/data
     environment:
@@ -44,36 +44,36 @@ services:
       - /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
     command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
-      - "--storage.tsdb.path=/prometheus"
-      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
-      - "--web.console.templates=/usr/share/prometheus/consoles"
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
     ports:
-      - "9090:9090"
+      - '9090:9090'
     restart: always
     networks:
       - network
 
   grafana:
-    image: grafana/grafana:10.4.2
+    image: grafana/grafana:10.3.2
     depends_on:
       - prometheus
     volumes:
       - grafana_data:/var/lib/grafana
     ports:
-      - "3000:3000"
+      - '3000:3000'
     restart: always
     networks:
       - network
 
   nodeexporter:
-    image: prom/node-exporter:v1.8.0
+    image: prom/node-exporter:v1.7.0
     volumes:
-      - "/:/host:ro,rslave"
+      - '/:/host:ro,rslave'
     command:
-      - "--path.rootfs=/host"
+      - '--path.rootfs=/host'
     ports:
-      - "9100:9100"
+      - '9100:9100'
     restart: always
     networks:
       - network
@@ -81,24 +81,24 @@ services:
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.49.1
     volumes:
-      - "/:/rootfs"
-      - "/var/run:/var/run"
-      - "/sys:/sys"
-      - "/var/lib/docker/:/var/lib/docker"
-      - "/dev/disk/:/dev/disk"
+      - '/:/rootfs'
+      - '/var/run:/var/run'
+      - '/sys:/sys'
+      - '/var/lib/docker/:/var/lib/docker'
+      - '/dev/disk/:/dev/disk'
     privileged: true
     devices:
-      - "/dev/kmsg"
+      - '/dev/kmsg'
     ports:
-      - "8880:8080"
+      - '8880:8080'
     restart: always
     networks:
       - network
 
   loki:
-    image: grafana/loki:3.0.0
+    image: grafana/loki:2.0.0
     ports:
-      - "3100:3100"
+      - '3100:3100'
     command:
       - -config.file=/etc/loki/local-config.yaml
     volumes:
@@ -110,9 +110,9 @@ services:
   promtail:
     image: grafana/promtail:3.0.0
     volumes:
-      - "/var/log:/var/log"
-      - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
-      - "/etc/promtail:/etc/promtail"
+      - '/var/log:/var/log'
+      - '/var/lib/docker/containers:/var/lib/docker/containers:ro'
+      - '/etc/promtail:/etc/promtail'
     command:
       - -config.file=/etc/promtail/config.yml
     restart: always
@@ -122,11 +122,11 @@ services:
   blackbox-exporter:
     image: bitnami/blackbox-exporter:0.25.0
     volumes:
-      - "/etc/blackbox/:/config/"
+      - '/etc/blackbox/:/config/'
     command:
-      - "--config.file=/config/blackbox.yml"
+      - '--config.file=/config/blackbox.yml'
     ports:
-      - "9116:9115"
+      - '9116:9115'
     restart: always
     networks:
       - network
@@ -134,14 +134,14 @@ services:
   nvidia-cuda-exporter:
     image: corosif/nvidia-cuda-exporter:0.0.2
     ports:
-      - "8888:8888"
+      - '8888:8888'
     volumes:
-      - "/usr/local/nvidia:/usr/local/nvidia"
+      - '/usr/local/nvidia:/usr/local/nvidia'
     deploy:
       resources:
         reservations:
           devices:
-            - capabilities: ["gpu"]
+            - capabilities: ['gpu']
     networks:
       - network
     restart: always
