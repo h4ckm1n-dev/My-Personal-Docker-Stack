@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   keycloak:
-    image: keycloak/keycloak:23.0.7
+    image: keycloak/keycloak:24.0.4
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
@@ -18,7 +18,7 @@ services:
       - network
 
   postgres:
-    image: postgres:15.7
+    image: postgres:16.3
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
@@ -55,7 +55,7 @@ services:
       - network
 
   grafana:
-    image: grafana/grafana:10.4.3
+    image: grafana/grafana:11.0.0
     depends_on:
       - prometheus
     volumes:
