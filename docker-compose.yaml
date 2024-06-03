@@ -30,7 +30,7 @@ services:
     restart: always
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:0.1.125
+    image: ghcr.io/open-webui/open-webui:v0.2.2
     network_mode: 'host'
     volumes:
       - open-webui:/app/backend/data
