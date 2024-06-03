@@ -17,16 +17,30 @@ services:
     networks:
       - network
 
-  postgres:
+  postgres-keycloak:
     image: postgres:16.3
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
       POSTGRES_PASSWORD: password
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_keycloak_data:/var/lib/postgresql/data
     ports:
       - '5432:5432'
+    networks:
+      - network
+    restart: always
+
+  postgres-backend:
+    image: postgres:16.3
+    environment:
+      POSTGRES_DB: backend
+      POSTGRES_USER: backend
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_backend_data:/var/lib/postgresql/data
+    ports:
+      - '5433:5432'
     networks:
       - network
     restart: always
