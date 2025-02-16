@@ -110,7 +110,7 @@ services:
       - network
 
   promtail:
-    image: grafana/promtail:3.4.0
+    image: grafana/promtail:3.4.2
     volumes:
       - '/var/log:/var/log'
       - '/var/lib/docker/containers:/var/lib/docker/containers:ro'
