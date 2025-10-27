@@ -69,7 +69,7 @@ services:
       - network
 
   nodeexporter:
-    image: prom/node-exporter:v1.9.1
+    image: prom/node-exporter:v1.10.0
     volumes:
       - '/:/host:ro,rslave'
     command:
