@@ -98,7 +98,7 @@ services:
       - network
 
   loki:
-    image: grafana/loki:3.6.4
+    image: grafana/loki:3.6.5
     ports:
       - '3100:3100'
     command:
@@ -110,7 +110,7 @@ services:
       - network
 
   promtail:
-    image: grafana/promtail:3.6.4
+    image: grafana/promtail:3.6.5
     volumes:
       - '/var/log:/var/log'
       - '/var/lib/docker/containers:/var/lib/docker/containers:ro'
