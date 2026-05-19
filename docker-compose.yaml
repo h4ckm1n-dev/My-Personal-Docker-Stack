@@ -18,7 +18,7 @@ services:
       - network
 
   postgres:
-    image: postgres:16.13
+    image: postgres:16.14
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
