@@ -98,7 +98,7 @@ services:
       - network
 
   loki:
-    image: grafana/loki:3.7.5
+    image: grafana/loki:3.7.6
     ports:
       - '3100:3100'
     command:
